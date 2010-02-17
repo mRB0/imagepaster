@@ -26,7 +26,6 @@ public class Imagepaster extends Applet implements ActionListener {
 	public void init()
 	{
 		LayoutManager lm = new BorderLayout();
-		//lm.
 
 		this.setSize(600, 600);
 		this.mabutton = new Button("Paste");
@@ -104,7 +103,9 @@ public class Imagepaster extends Applet implements ActionListener {
 		{
 			this.malabel.setText("Uploading...");
 			
-			URL u = new URL("http://s.engramstudio.com/upload.cgi");
+//			URL u = new URL("http://imgur.com/processUpload1.php");
+//			URL u = new URL("http://s.engramstudio.com/upload.cgi");
+			URL u = new URL("http://snobwall.com/upload/upload.cgi");
 			HttpURLConnection huc = (HttpURLConnection) u.openConnection();
 			
 			huc.setDoInput(true);
@@ -115,7 +116,7 @@ public class Imagepaster extends Applet implements ActionListener {
 					"Keep-Alive");
 			huc.setRequestProperty(
 					"HTTP_REFERER",
-					"http://s.engramstudio.com/upload.cgi");
+					"http://snobwall.com/upload/upload.cgi");
 			huc.setRequestProperty(
 					"Content-Type",
 					"multipart/form-data; boundary=" + boundary);
@@ -126,7 +127,12 @@ public class Imagepaster extends Applet implements ActionListener {
 			
 			/*
 			dstream.writeBytes("--" + boundary + "\r\n");
-			dstream.writeBytes("Content-disposition: form-data; name=\"comment\"\r\n\r\n");
+			dstream.writeBytes("Content-disposition: form-data; name=\"MAX_FILE_SIZE\"\r\n\r\n");
+			dstream.writeBytes("10485760");
+			
+			dstream.writeBytes("--" + boundary + "\r\n");
+			dstream.writeBytes("Content-disposition: form-data; name=\"UPLOAD_IDENTIFIER\"\r\n\r\n");
+			dstream.writeBytes("hexlehexle");
 			*/
 			
 			Date d = new Date();
@@ -173,7 +179,7 @@ public class Imagepaster extends Applet implements ActionListener {
 					System.out.println(line);
 				}
 				this.malabel.setText("Upload complete and maybe successful!");
-				this.getAppletContext().showDocument(new URL("http://s.engramstudio.com/src/clip_" + the_date + ".png"));
+				this.getAppletContext().showDocument(new URL("http://snobwall.com/upload/stored/clip_" + the_date + ".png"));
 			}
 			
 		}
